@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Result Checker</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #123c69;
+        }
+
+        p {
+            text-align: center;
+            color: #555;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 7px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #123c69;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0b2545;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f4ff;
+            border-radius: 8px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Student Result Checker</h1>
+
+        <p>Check your academic performance</p>
+
+        <label for="studentName">Student Name</label>
+        <input type="text" id="studentName"
+               placeholder="Enter your name">
+
+        <label for="matricNo">Matriculation Number</label>
+        <input type="text" id="matricNo"
+               placeholder="Enter your matric number">
+
+        <label for="caScore">CA Score (30)</label>
+        <input type="number" id="caScore"
+               placeholder="Enter CA score" min="0" max="30">
+
+        <label for="examScore">Exam Score (70)</label>
+        <input type="number" id="examScore"
+               placeholder="Enter examination score" min="0" max="70">
+
+        <button onclick="checkResult()">Check Result</button>
+
+        <div id="result"></div>
+
+    </div>
+
+    <script>
+        function checkResult() {
+
+            let name = document.getElementById("studentName").value.trim();
+            let matric = document.getElementById("matricNo").value.trim();
+
+            let ca = document.getElementById("caScore").value;
+            let exam = document.getElementById("examScore").value;
+
+            let resultBox = document.getElementById("result");
+
+            if (name === "" || matric === "" ||
+                ca === "" || exam === "") {
+
+                alert("Please fill in all the fields!");
+                return;
+            }
+
+            ca = Number(ca);
+            exam = Number(exam);
+
+            if (ca < 0 || ca > 30 || exam < 0 || exam > 70) {
+                alert("CA must be 0-30 and Exam must be 0-70.");
+                return;
+            }
+
+            let total = ca + exam;
+            let grade;
+
+            if (total >= 70) {
+                grade = "A";
+            } else if (total >= 60) {
+                grade = "B";
+            } else if (total >= 50) {
+                grade = "C";
+            } else if (total >= 45) {
+                grade = "D";
+            } else if (total >= 40) {
+                grade = "E";
+            } else {
+                grade = "F";
+            }
+
+            resultBox.style.display = "block";
+
+            resultBox.innerHTML =
+                "<h3>Student Result</h3>" +
+                "<p><strong>Name:</strong> " + name + "</p>" +
+                "<p><strong>Matric No:</strong> " + matric + "</p>" +
+                "<p><strong>Total Score:</strong> " + total + "/100</p>" +
+                "<p><strong>Grade:</strong> " + grade + "</p>";
+        }
+    </script>
+
+</body>
+</html>
