@@ -48,7 +48,7 @@ Future Improvements
 - Support for multiple courses.
 - GPA calculation.
 - Improved mobile responsiveness.
-- Connection to a secure backend and database.
+
 
 Author
 
